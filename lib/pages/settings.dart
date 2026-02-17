@@ -58,7 +58,7 @@ class SettingsPage extends HookConsumerWidget {
               label: Text('Redmine Authority'),
               child: TextField(
                 placeholder: const Text('etiscan.redmine.com'),
-                initialValue: settings.redmineApiKey,
+                initialValue: settings.redmineHost,
               ),
             ),
             Row(
