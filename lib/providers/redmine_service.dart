@@ -12,11 +12,17 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'redmine_service.g.dart';
 
 class RedmineService {
-  const RedmineService(this.client, this.authority);
+  const RedmineService(
+    this.client,
+    this.authority,
+    this.fetchOnlyIssuesAssignedToMe,
+  );
 
   final RedmineClient client;
 
   final String? authority;
+
+  final bool fetchOnlyIssuesAssignedToMe;
 
   static const currentUserPath = '/users/current.json';
   static const issuesPath = '/issues.json';
@@ -34,7 +40,7 @@ class RedmineService {
     return user;
   }
 
-  Future<List<RedmineIssue>> getMyIssues() async {
+  Future<List<RedmineIssue>> getIssues() async {
     final response = await client.get(
       Uri.https(authority!, issuesPath, {
         'assigned_to_id': 'me',
@@ -60,8 +66,12 @@ class RedmineService {
 
 @Riverpod(dependencies: [redmineClient, Settings])
 RedmineService redmineService(Ref ref) {
-  final settings = ref.watch(settingsProvider.select((x) => x.redmineHost));
+  final (redmineHost, fetchOnlyIssuesAssignedToMe) = ref.watch(
+    settingsProvider.select(
+      (x) => (x.redmineHost, x.fetchOnlyIssuesAssignedToMe),
+    ),
+  );
   final client = ref.watch(redmineClientProvider);
 
-  return RedmineService(client, settings);
+  return RedmineService(client, redmineHost, fetchOnlyIssuesAssignedToMe);
 }

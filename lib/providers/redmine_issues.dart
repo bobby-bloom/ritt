@@ -15,7 +15,7 @@ Future<List<RedmineIssue>> issues(Ref ref) async {
   final appStore = ref.watch(appStoreProvider);
 
   if (redmineService.canMakeRequests) {
-    final issues = await redmineService.getMyIssues();
+    final issues = await redmineService.getIssues();
 
     unawaited(appStore.write(storeKey, issues));
 

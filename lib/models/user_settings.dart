@@ -11,6 +11,7 @@ abstract class UserSettings with _$UserSettings {
     String? redmineHost,
     @Default(false) bool allowMultipleTimersRunningSimultaneously,
     @Default(ThemeMode.system) ThemeMode themeMode,
+    @Default(true) bool fetchOnlyIssuesAssignedToMe,
   }) = _UserSettings;
 
   factory UserSettings.fromJson(Map<String, dynamic> json) =>

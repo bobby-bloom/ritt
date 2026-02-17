@@ -24,13 +24,14 @@ class SettingsPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(settingsProvider);
 
+    final apiKeyFormKey = InputKey('apiKey');
+    final hostFormKey = InputKey('host');
+
     final allowMultipleTimersRunningSimultaneously = useState(
       settings.allowMultipleTimersRunningSimultaneously,
     );
+    final fetchOnlyMyIssues = useState(settings.fetchOnlyIssuesAssignedToMe);
     final themeMode = useState(settings.themeMode);
-
-    final apiKeyFormKey = InputKey('apiKey');
-    final hostFormKey = InputKey('host');
 
     return Container(
       padding: context.paddingXL,
@@ -40,6 +41,7 @@ class SettingsPage extends HookConsumerWidget {
           form[apiKeyFormKey],
           form[hostFormKey],
           allowMultipleTimersRunningSimultaneously.value,
+          fetchOnlyMyIssues.value,
           themeMode.value,
         ),
         child: Column(
@@ -55,7 +57,7 @@ class SettingsPage extends HookConsumerWidget {
             ),
             FormField(
               key: hostFormKey,
-              label: Text('Redmine Authority'),
+              label: Text('Redmine Host'),
               child: TextField(
                 placeholder: const Text('etiscan.redmine.com'),
                 initialValue: settings.redmineHost,
@@ -69,6 +71,18 @@ class SettingsPage extends HookConsumerWidget {
                   value: allowMultipleTimersRunningSimultaneously.value,
                   onChanged: (value) {
                     allowMultipleTimersRunningSimultaneously.value = value;
+                  },
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: .spaceBetween,
+              children: [
+                Text('Fetch only issues assigned to me'),
+                Switch(
+                  value: fetchOnlyMyIssues.value,
+                  onChanged: (value) {
+                    fetchOnlyMyIssues.value = value;
                   },
                 ),
               ],
@@ -121,6 +135,7 @@ class SettingsPage extends HookConsumerWidget {
     String? apiKey,
     String? host,
     bool allowMultipleTimersRunningSimultaneously,
+    bool fetchOnlyMyIssues,
     ThemeMode mode,
   ) async {
     final ctl = ref.read(settingsProvider.notifier);
@@ -131,6 +146,7 @@ class SettingsPage extends HookConsumerWidget {
         redmineHost: host,
         allowMultipleTimersRunningSimultaneously:
             allowMultipleTimersRunningSimultaneously,
+        fetchOnlyIssuesAssignedToMe: fetchOnlyMyIssues,
         themeMode: mode,
       ),
     );

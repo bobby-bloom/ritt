@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserSettings {
 
- String? get redmineApiKey; String? get redmineHost; bool get allowMultipleTimersRunningSimultaneously; ThemeMode get themeMode;
+ String? get redmineApiKey; String? get redmineHost; bool get allowMultipleTimersRunningSimultaneously; ThemeMode get themeMode; bool get fetchOnlyIssuesAssignedToMe;
 /// Create a copy of UserSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $UserSettingsCopyWith<UserSettings> get copyWith => _$UserSettingsCopyWithImpl<U
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserSettings&&(identical(other.redmineApiKey, redmineApiKey) || other.redmineApiKey == redmineApiKey)&&(identical(other.redmineHost, redmineHost) || other.redmineHost == redmineHost)&&(identical(other.allowMultipleTimersRunningSimultaneously, allowMultipleTimersRunningSimultaneously) || other.allowMultipleTimersRunningSimultaneously == allowMultipleTimersRunningSimultaneously)&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserSettings&&(identical(other.redmineApiKey, redmineApiKey) || other.redmineApiKey == redmineApiKey)&&(identical(other.redmineHost, redmineHost) || other.redmineHost == redmineHost)&&(identical(other.allowMultipleTimersRunningSimultaneously, allowMultipleTimersRunningSimultaneously) || other.allowMultipleTimersRunningSimultaneously == allowMultipleTimersRunningSimultaneously)&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.fetchOnlyIssuesAssignedToMe, fetchOnlyIssuesAssignedToMe) || other.fetchOnlyIssuesAssignedToMe == fetchOnlyIssuesAssignedToMe));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,redmineApiKey,redmineHost,allowMultipleTimersRunningSimultaneously,themeMode);
+int get hashCode => Object.hash(runtimeType,redmineApiKey,redmineHost,allowMultipleTimersRunningSimultaneously,themeMode,fetchOnlyIssuesAssignedToMe);
 
 @override
 String toString() {
-  return 'UserSettings(redmineApiKey: $redmineApiKey, redmineHost: $redmineHost, allowMultipleTimersRunningSimultaneously: $allowMultipleTimersRunningSimultaneously, themeMode: $themeMode)';
+  return 'UserSettings(redmineApiKey: $redmineApiKey, redmineHost: $redmineHost, allowMultipleTimersRunningSimultaneously: $allowMultipleTimersRunningSimultaneously, themeMode: $themeMode, fetchOnlyIssuesAssignedToMe: $fetchOnlyIssuesAssignedToMe)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $UserSettingsCopyWith<$Res>  {
   factory $UserSettingsCopyWith(UserSettings value, $Res Function(UserSettings) _then) = _$UserSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? redmineApiKey, String? redmineHost, bool allowMultipleTimersRunningSimultaneously, ThemeMode themeMode
+ String? redmineApiKey, String? redmineHost, bool allowMultipleTimersRunningSimultaneously, ThemeMode themeMode, bool fetchOnlyIssuesAssignedToMe
 });
 
 
@@ -65,13 +65,14 @@ class _$UserSettingsCopyWithImpl<$Res>
 
 /// Create a copy of UserSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? redmineApiKey = freezed,Object? redmineHost = freezed,Object? allowMultipleTimersRunningSimultaneously = null,Object? themeMode = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? redmineApiKey = freezed,Object? redmineHost = freezed,Object? allowMultipleTimersRunningSimultaneously = null,Object? themeMode = null,Object? fetchOnlyIssuesAssignedToMe = null,}) {
   return _then(_self.copyWith(
 redmineApiKey: freezed == redmineApiKey ? _self.redmineApiKey : redmineApiKey // ignore: cast_nullable_to_non_nullable
 as String?,redmineHost: freezed == redmineHost ? _self.redmineHost : redmineHost // ignore: cast_nullable_to_non_nullable
 as String?,allowMultipleTimersRunningSimultaneously: null == allowMultipleTimersRunningSimultaneously ? _self.allowMultipleTimersRunningSimultaneously : allowMultipleTimersRunningSimultaneously // ignore: cast_nullable_to_non_nullable
 as bool,themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
-as ThemeMode,
+as ThemeMode,fetchOnlyIssuesAssignedToMe: null == fetchOnlyIssuesAssignedToMe ? _self.fetchOnlyIssuesAssignedToMe : fetchOnlyIssuesAssignedToMe // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -156,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? redmineApiKey,  String? redmineHost,  bool allowMultipleTimersRunningSimultaneously,  ThemeMode themeMode)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? redmineApiKey,  String? redmineHost,  bool allowMultipleTimersRunningSimultaneously,  ThemeMode themeMode,  bool fetchOnlyIssuesAssignedToMe)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserSettings() when $default != null:
-return $default(_that.redmineApiKey,_that.redmineHost,_that.allowMultipleTimersRunningSimultaneously,_that.themeMode);case _:
+return $default(_that.redmineApiKey,_that.redmineHost,_that.allowMultipleTimersRunningSimultaneously,_that.themeMode,_that.fetchOnlyIssuesAssignedToMe);case _:
   return orElse();
 
 }
@@ -177,10 +178,10 @@ return $default(_that.redmineApiKey,_that.redmineHost,_that.allowMultipleTimersR
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? redmineApiKey,  String? redmineHost,  bool allowMultipleTimersRunningSimultaneously,  ThemeMode themeMode)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? redmineApiKey,  String? redmineHost,  bool allowMultipleTimersRunningSimultaneously,  ThemeMode themeMode,  bool fetchOnlyIssuesAssignedToMe)  $default,) {final _that = this;
 switch (_that) {
 case _UserSettings():
-return $default(_that.redmineApiKey,_that.redmineHost,_that.allowMultipleTimersRunningSimultaneously,_that.themeMode);case _:
+return $default(_that.redmineApiKey,_that.redmineHost,_that.allowMultipleTimersRunningSimultaneously,_that.themeMode,_that.fetchOnlyIssuesAssignedToMe);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +198,10 @@ return $default(_that.redmineApiKey,_that.redmineHost,_that.allowMultipleTimersR
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? redmineApiKey,  String? redmineHost,  bool allowMultipleTimersRunningSimultaneously,  ThemeMode themeMode)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? redmineApiKey,  String? redmineHost,  bool allowMultipleTimersRunningSimultaneously,  ThemeMode themeMode,  bool fetchOnlyIssuesAssignedToMe)?  $default,) {final _that = this;
 switch (_that) {
 case _UserSettings() when $default != null:
-return $default(_that.redmineApiKey,_that.redmineHost,_that.allowMultipleTimersRunningSimultaneously,_that.themeMode);case _:
+return $default(_that.redmineApiKey,_that.redmineHost,_that.allowMultipleTimersRunningSimultaneously,_that.themeMode,_that.fetchOnlyIssuesAssignedToMe);case _:
   return null;
 
 }
@@ -212,13 +213,14 @@ return $default(_that.redmineApiKey,_that.redmineHost,_that.allowMultipleTimersR
 @JsonSerializable()
 
 class _UserSettings implements UserSettings {
-  const _UserSettings({this.redmineApiKey, this.redmineHost, this.allowMultipleTimersRunningSimultaneously = false, this.themeMode = ThemeMode.system});
+  const _UserSettings({this.redmineApiKey, this.redmineHost, this.allowMultipleTimersRunningSimultaneously = false, this.themeMode = ThemeMode.system, this.fetchOnlyIssuesAssignedToMe = true});
   factory _UserSettings.fromJson(Map<String, dynamic> json) => _$UserSettingsFromJson(json);
 
 @override final  String? redmineApiKey;
 @override final  String? redmineHost;
 @override@JsonKey() final  bool allowMultipleTimersRunningSimultaneously;
 @override@JsonKey() final  ThemeMode themeMode;
+@override@JsonKey() final  bool fetchOnlyIssuesAssignedToMe;
 
 /// Create a copy of UserSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -233,16 +235,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserSettings&&(identical(other.redmineApiKey, redmineApiKey) || other.redmineApiKey == redmineApiKey)&&(identical(other.redmineHost, redmineHost) || other.redmineHost == redmineHost)&&(identical(other.allowMultipleTimersRunningSimultaneously, allowMultipleTimersRunningSimultaneously) || other.allowMultipleTimersRunningSimultaneously == allowMultipleTimersRunningSimultaneously)&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserSettings&&(identical(other.redmineApiKey, redmineApiKey) || other.redmineApiKey == redmineApiKey)&&(identical(other.redmineHost, redmineHost) || other.redmineHost == redmineHost)&&(identical(other.allowMultipleTimersRunningSimultaneously, allowMultipleTimersRunningSimultaneously) || other.allowMultipleTimersRunningSimultaneously == allowMultipleTimersRunningSimultaneously)&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.fetchOnlyIssuesAssignedToMe, fetchOnlyIssuesAssignedToMe) || other.fetchOnlyIssuesAssignedToMe == fetchOnlyIssuesAssignedToMe));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,redmineApiKey,redmineHost,allowMultipleTimersRunningSimultaneously,themeMode);
+int get hashCode => Object.hash(runtimeType,redmineApiKey,redmineHost,allowMultipleTimersRunningSimultaneously,themeMode,fetchOnlyIssuesAssignedToMe);
 
 @override
 String toString() {
-  return 'UserSettings(redmineApiKey: $redmineApiKey, redmineHost: $redmineHost, allowMultipleTimersRunningSimultaneously: $allowMultipleTimersRunningSimultaneously, themeMode: $themeMode)';
+  return 'UserSettings(redmineApiKey: $redmineApiKey, redmineHost: $redmineHost, allowMultipleTimersRunningSimultaneously: $allowMultipleTimersRunningSimultaneously, themeMode: $themeMode, fetchOnlyIssuesAssignedToMe: $fetchOnlyIssuesAssignedToMe)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$UserSettingsCopyWith<$Res> implements $UserSettingsCopyWi
   factory _$UserSettingsCopyWith(_UserSettings value, $Res Function(_UserSettings) _then) = __$UserSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? redmineApiKey, String? redmineHost, bool allowMultipleTimersRunningSimultaneously, ThemeMode themeMode
+ String? redmineApiKey, String? redmineHost, bool allowMultipleTimersRunningSimultaneously, ThemeMode themeMode, bool fetchOnlyIssuesAssignedToMe
 });
 
 
@@ -270,13 +272,14 @@ class __$UserSettingsCopyWithImpl<$Res>
 
 /// Create a copy of UserSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? redmineApiKey = freezed,Object? redmineHost = freezed,Object? allowMultipleTimersRunningSimultaneously = null,Object? themeMode = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? redmineApiKey = freezed,Object? redmineHost = freezed,Object? allowMultipleTimersRunningSimultaneously = null,Object? themeMode = null,Object? fetchOnlyIssuesAssignedToMe = null,}) {
   return _then(_UserSettings(
 redmineApiKey: freezed == redmineApiKey ? _self.redmineApiKey : redmineApiKey // ignore: cast_nullable_to_non_nullable
 as String?,redmineHost: freezed == redmineHost ? _self.redmineHost : redmineHost // ignore: cast_nullable_to_non_nullable
 as String?,allowMultipleTimersRunningSimultaneously: null == allowMultipleTimersRunningSimultaneously ? _self.allowMultipleTimersRunningSimultaneously : allowMultipleTimersRunningSimultaneously // ignore: cast_nullable_to_non_nullable
 as bool,themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
-as ThemeMode,
+as ThemeMode,fetchOnlyIssuesAssignedToMe: null == fetchOnlyIssuesAssignedToMe ? _self.fetchOnlyIssuesAssignedToMe : fetchOnlyIssuesAssignedToMe // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

@@ -42,11 +42,6 @@ class Timers extends _$Timers {
     if (timer.isRunning) {
       timer = _stop(timer);
     } else {
-      if (!ref
-          .read(settingsProvider)
-          .allowMultipleTimersRunningSimultaneously) {
-        state = state.map((x) => _stop(x)).toList();
-      }
       timer = _start(timer);
     }
 
@@ -102,6 +97,19 @@ class Timers extends _$Timers {
     _writeState();
   }
 
+  // void reorder(int oldIndex, int newIndex) {
+  //   final list = [...state];
+  //   final item = list.removeAt(oldIndex);
+  //   list.insert(newIndex, item);
+  //   state = list;
+  // }
+
+  void set(List<Timer> timers) {
+    state = timers;
+
+    _writeState();
+  }
+
   Timer _stop(Timer timer) {
     if (!timer.isRunning) {
       return timer;
@@ -117,6 +125,14 @@ class Timers extends _$Timers {
   }
 
   Timer _start(Timer timer) {
+    final allowTimesRunningSimultaneously = ref
+        .read(settingsProvider)
+        .allowMultipleTimersRunningSimultaneously;
+
+    if (!allowTimesRunningSimultaneously) {
+      state = state.map((x) => _stop(x)).toList();
+    }
+
     return timer.copyWith(isRunning: true, lastStartOn: DateTime.timestamp());
   }
 
