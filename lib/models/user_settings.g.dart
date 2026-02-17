@@ -11,7 +11,7 @@ _UserSettings _$UserSettingsFromJson(Map<String, dynamic> json) =>
       redmineApiKey: json['redmineApiKey'] as String?,
       redmineHost: json['redmineHost'] as String?,
       allowMultipleTimersRunningSimultaneously:
-          json['allowMultipleTimersRunningSimultaneously'] as bool? ?? true,
+          json['allowMultipleTimersRunningSimultaneously'] as bool? ?? false,
       themeMode:
           $enumDecodeNullable(_$ThemeModeEnumMap, json['themeMode']) ??
           ThemeMode.system,

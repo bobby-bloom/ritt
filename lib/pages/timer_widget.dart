@@ -146,7 +146,7 @@ class TimerWidget extends HookConsumerWidget {
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () => launchUrl(
                                       Uri.parse(
-                                        'https://${settings.redmineHost}?issue=${timer.issueId}',
+                                        'https://${settings.redmineHost}/issues/${timer.issueId}',
                                       ),
                                     ),
                                 ),

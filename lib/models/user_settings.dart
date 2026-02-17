@@ -9,7 +9,7 @@ abstract class UserSettings with _$UserSettings {
   const factory UserSettings({
     String? redmineApiKey,
     String? redmineHost,
-    @Default(true) bool allowMultipleTimersRunningSimultaneously,
+    @Default(false) bool allowMultipleTimersRunningSimultaneously,
     @Default(ThemeMode.system) ThemeMode themeMode,
   }) = _UserSettings;
 

@@ -212,7 +212,7 @@ return $default(_that.redmineApiKey,_that.redmineHost,_that.allowMultipleTimersR
 @JsonSerializable()
 
 class _UserSettings implements UserSettings {
-  const _UserSettings({this.redmineApiKey, this.redmineHost, this.allowMultipleTimersRunningSimultaneously = true, this.themeMode = ThemeMode.system});
+  const _UserSettings({this.redmineApiKey, this.redmineHost, this.allowMultipleTimersRunningSimultaneously = false, this.themeMode = ThemeMode.system});
   factory _UserSettings.fromJson(Map<String, dynamic> json) => _$UserSettingsFromJson(json);
 
 @override final  String? redmineApiKey;

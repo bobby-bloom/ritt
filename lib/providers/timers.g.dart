@@ -46,7 +46,7 @@ final class TimersProvider extends $NotifierProvider<Timers, List<Timer>> {
   }
 }
 
-String _$timersHash() => r'669ed3bcfc08724469dc3085bba51084a5223378';
+String _$timersHash() => r'cf1bc47e3779fc265a0cc8fca0511b34eda7d969';
 
 abstract class _$Timers extends $Notifier<List<Timer>> {
   List<Timer> build();

@@ -42,7 +42,9 @@ class Timers extends _$Timers {
     if (timer.isRunning) {
       timer = _stop(timer);
     } else {
-      if (ref.read(settingsProvider).allowMultipleTimersRunningSimultaneously) {
+      if (!ref
+          .read(settingsProvider)
+          .allowMultipleTimersRunningSimultaneously) {
         state = state.map((x) => _stop(x)).toList();
       }
       timer = _start(timer);
