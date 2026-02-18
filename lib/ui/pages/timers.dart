@@ -4,7 +4,7 @@ import 'package:flutter_reorderable_grid_view/widgets/reorderable_builder.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ritt/models/timer.dart';
-import 'package:ritt/pages/timer_widget.dart';
+import 'package:ritt/ui/pages/timer_widget.dart';
 import 'package:ritt/providers/timers.dart';
 import 'package:ritt/theme/theme_extensions.dart';
 

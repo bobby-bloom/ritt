@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:ritt/pages/issues.dart';
-import 'package:ritt/pages/settings.dart';
-import 'package:ritt/pages/timers.dart';
+import 'package:ritt/ui/pages/issues.dart';
+import 'package:ritt/ui/pages/settings.dart';
+import 'package:ritt/ui/pages/timers.dart';
 import 'package:ritt/providers/settings.dart';
 import 'package:ritt/providers/shared_preferences.dart';
 import 'package:ritt/theme/theme_extensions.dart';
