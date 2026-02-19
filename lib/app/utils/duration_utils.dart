@@ -4,7 +4,7 @@ class DurationUtils {
     int intervalMinutes,
   ) {
     if (intervalMinutes <= 0) {
-      throw ArgumentError('intervalMinutes must be greater than 0');
+      return duration;
     }
 
     final interval = Duration(minutes: intervalMinutes);

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart' hide FormField, TextField, Form;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:ritt/app/providers/settings.dart';
+import 'package:ritt/app/utils/duration_utils.dart';
 import 'package:ritt/redmine/models/redmine_issue.dart';
 import 'package:ritt/redmine/providers/redmine_service.dart';
 import 'package:ritt/redmine/providers/redmine_user.dart';
@@ -34,10 +36,16 @@ class PostTimeDialog extends HookConsumerWidget {
     final commentsFormKey = InputKey('comments');
 
     final tTimer = useState(timer);
+    final settings = ref.watch(settingsProvider);
 
     final isBillable = useState(false);
     final hoursCtl = useRef(
-      ComponentValueController<Duration>(tTimer.value.totalTime),
+      ComponentValueController<Duration>(
+        DurationUtils.roundUpToMinuteInterval(
+          tTimer.value.totalTime,
+          settings.roundTimeEntryUpToMinute,
+        ),
+      ),
     );
 
     final user = ref.watch(redmineUserProvider).value;
@@ -51,7 +59,11 @@ class PostTimeDialog extends HookConsumerWidget {
 
       WidgetsBinding.instance.addPostFrameCallback((_) {
         tTimer.value = ref.read(timersProvider.notifier).toggle(timer);
-        hoursCtl.value.value = tTimer.value.totalTime;
+
+        hoursCtl.value.value = DurationUtils.roundUpToMinuteInterval(
+          tTimer.value.totalTime,
+          settings.roundTimeEntryUpToMinute,
+        );
       });
 
       return null;
