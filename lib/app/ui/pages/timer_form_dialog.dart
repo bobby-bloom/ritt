@@ -6,7 +6,12 @@ import 'package:shadcn_flutter/shadcn_flutter.dart'
 import '../../models/timer.dart';
 
 typedef OnTimerFormDialogSubmit =
-    void Function(String? issueId, String? project, String? subject);
+    void Function(
+      String? issueId,
+      String? project,
+      String? subject,
+      String? tracker,
+    );
 
 class TimerFormDialog extends StatelessWidget {
   const TimerFormDialog({super.key, this.timer, this.onSubmit});
@@ -20,6 +25,7 @@ class TimerFormDialog extends StatelessWidget {
     final idFormKey = InputKey('issue-id');
     final projectFormKey = InputKey('project');
     final subjectFormKey = InputKey('subject');
+    final trackerFormKey = InputKey('tracker');
 
     return Dialog(
       backgroundColor: context.colorScheme.surfaceContainerLowest,
@@ -33,6 +39,7 @@ class TimerFormDialog extends StatelessWidget {
                 form[idFormKey],
                 form[projectFormKey],
                 form[subjectFormKey],
+                form[trackerFormKey],
               );
               Navigator.of(context).pop();
             },
@@ -72,6 +79,14 @@ class TimerFormDialog extends StatelessWidget {
                   label: Text('Subject'),
                   child: TextField(
                     placeholder: const Text('Task 123'),
+                    initialValue: timer?.issueSubject,
+                  ),
+                ),
+                FormField(
+                  key: trackerFormKey,
+                  label: Text('Tracker'),
+                  child: TextField(
+                    placeholder: const Text('Issue'),
                     initialValue: timer?.issueSubject,
                   ),
                 ),

@@ -58,7 +58,18 @@ class Timers extends _$Timers {
     _writeState();
   }
 
-  void create({String? issueId, String? issueProject, String? issueSubject}) {
+  void removeAll() {
+    state = [];
+
+    _writeState();
+  }
+
+  void create({
+    String? issueId,
+    String? issueProject,
+    String? issueSubject,
+    String? issueTracker,
+  }) {
     final newTimer = Timer(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       totalTime: Duration.zero,
@@ -66,6 +77,7 @@ class Timers extends _$Timers {
       issueId: issueId,
       issueProject: issueProject,
       issueSubject: issueSubject,
+      issueTracker: issueTracker,
     );
 
     state = [...state, newTimer];
@@ -78,6 +90,7 @@ class Timers extends _$Timers {
     String? issueId,
     String? issueProject,
     String? issueSubject,
+    String? issueTracker,
   }) {
     state = state.map((timer) {
       if (timer.id == id) {
@@ -85,6 +98,7 @@ class Timers extends _$Timers {
           issueId: issueId,
           issueProject: issueProject,
           issueSubject: issueSubject,
+          issueTracker: issueTracker,
         );
       }
       return timer;

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Timer {
 
- String get id; Duration get totalTime; bool get isRunning; DateTime? get lastStartOn; String? get issueId; String? get issueProject; String? get issueSubject;
+ String get id; Duration get totalTime; bool get isRunning; DateTime? get lastStartOn; String? get issueId; String? get issueProject; String? get issueSubject; String? get issueTracker;
 /// Create a copy of Timer
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TimerCopyWith<Timer> get copyWith => _$TimerCopyWithImpl<Timer>(this as Timer, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Timer&&(identical(other.id, id) || other.id == id)&&(identical(other.totalTime, totalTime) || other.totalTime == totalTime)&&(identical(other.isRunning, isRunning) || other.isRunning == isRunning)&&(identical(other.lastStartOn, lastStartOn) || other.lastStartOn == lastStartOn)&&(identical(other.issueId, issueId) || other.issueId == issueId)&&(identical(other.issueProject, issueProject) || other.issueProject == issueProject)&&(identical(other.issueSubject, issueSubject) || other.issueSubject == issueSubject));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Timer&&(identical(other.id, id) || other.id == id)&&(identical(other.totalTime, totalTime) || other.totalTime == totalTime)&&(identical(other.isRunning, isRunning) || other.isRunning == isRunning)&&(identical(other.lastStartOn, lastStartOn) || other.lastStartOn == lastStartOn)&&(identical(other.issueId, issueId) || other.issueId == issueId)&&(identical(other.issueProject, issueProject) || other.issueProject == issueProject)&&(identical(other.issueSubject, issueSubject) || other.issueSubject == issueSubject)&&(identical(other.issueTracker, issueTracker) || other.issueTracker == issueTracker));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,totalTime,isRunning,lastStartOn,issueId,issueProject,issueSubject);
+int get hashCode => Object.hash(runtimeType,id,totalTime,isRunning,lastStartOn,issueId,issueProject,issueSubject,issueTracker);
 
 @override
 String toString() {
-  return 'Timer(id: $id, totalTime: $totalTime, isRunning: $isRunning, lastStartOn: $lastStartOn, issueId: $issueId, issueProject: $issueProject, issueSubject: $issueSubject)';
+  return 'Timer(id: $id, totalTime: $totalTime, isRunning: $isRunning, lastStartOn: $lastStartOn, issueId: $issueId, issueProject: $issueProject, issueSubject: $issueSubject, issueTracker: $issueTracker)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TimerCopyWith<$Res>  {
   factory $TimerCopyWith(Timer value, $Res Function(Timer) _then) = _$TimerCopyWithImpl;
 @useResult
 $Res call({
- String id, Duration totalTime, bool isRunning, DateTime? lastStartOn, String? issueId, String? issueProject, String? issueSubject
+ String id, Duration totalTime, bool isRunning, DateTime? lastStartOn, String? issueId, String? issueProject, String? issueSubject, String? issueTracker
 });
 
 
@@ -65,7 +65,7 @@ class _$TimerCopyWithImpl<$Res>
 
 /// Create a copy of Timer
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? totalTime = null,Object? isRunning = null,Object? lastStartOn = freezed,Object? issueId = freezed,Object? issueProject = freezed,Object? issueSubject = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? totalTime = null,Object? isRunning = null,Object? lastStartOn = freezed,Object? issueId = freezed,Object? issueProject = freezed,Object? issueSubject = freezed,Object? issueTracker = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,totalTime: null == totalTime ? _self.totalTime : totalTime // ignore: cast_nullable_to_non_nullable
@@ -74,6 +74,7 @@ as bool,lastStartOn: freezed == lastStartOn ? _self.lastStartOn : lastStartOn //
 as DateTime?,issueId: freezed == issueId ? _self.issueId : issueId // ignore: cast_nullable_to_non_nullable
 as String?,issueProject: freezed == issueProject ? _self.issueProject : issueProject // ignore: cast_nullable_to_non_nullable
 as String?,issueSubject: freezed == issueSubject ? _self.issueSubject : issueSubject // ignore: cast_nullable_to_non_nullable
+as String?,issueTracker: freezed == issueTracker ? _self.issueTracker : issueTracker // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -159,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  Duration totalTime,  bool isRunning,  DateTime? lastStartOn,  String? issueId,  String? issueProject,  String? issueSubject)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  Duration totalTime,  bool isRunning,  DateTime? lastStartOn,  String? issueId,  String? issueProject,  String? issueSubject,  String? issueTracker)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Timer() when $default != null:
-return $default(_that.id,_that.totalTime,_that.isRunning,_that.lastStartOn,_that.issueId,_that.issueProject,_that.issueSubject);case _:
+return $default(_that.id,_that.totalTime,_that.isRunning,_that.lastStartOn,_that.issueId,_that.issueProject,_that.issueSubject,_that.issueTracker);case _:
   return orElse();
 
 }
@@ -180,10 +181,10 @@ return $default(_that.id,_that.totalTime,_that.isRunning,_that.lastStartOn,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  Duration totalTime,  bool isRunning,  DateTime? lastStartOn,  String? issueId,  String? issueProject,  String? issueSubject)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  Duration totalTime,  bool isRunning,  DateTime? lastStartOn,  String? issueId,  String? issueProject,  String? issueSubject,  String? issueTracker)  $default,) {final _that = this;
 switch (_that) {
 case _Timer():
-return $default(_that.id,_that.totalTime,_that.isRunning,_that.lastStartOn,_that.issueId,_that.issueProject,_that.issueSubject);case _:
+return $default(_that.id,_that.totalTime,_that.isRunning,_that.lastStartOn,_that.issueId,_that.issueProject,_that.issueSubject,_that.issueTracker);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +201,10 @@ return $default(_that.id,_that.totalTime,_that.isRunning,_that.lastStartOn,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  Duration totalTime,  bool isRunning,  DateTime? lastStartOn,  String? issueId,  String? issueProject,  String? issueSubject)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  Duration totalTime,  bool isRunning,  DateTime? lastStartOn,  String? issueId,  String? issueProject,  String? issueSubject,  String? issueTracker)?  $default,) {final _that = this;
 switch (_that) {
 case _Timer() when $default != null:
-return $default(_that.id,_that.totalTime,_that.isRunning,_that.lastStartOn,_that.issueId,_that.issueProject,_that.issueSubject);case _:
+return $default(_that.id,_that.totalTime,_that.isRunning,_that.lastStartOn,_that.issueId,_that.issueProject,_that.issueSubject,_that.issueTracker);case _:
   return null;
 
 }
@@ -215,7 +216,7 @@ return $default(_that.id,_that.totalTime,_that.isRunning,_that.lastStartOn,_that
 @JsonSerializable()
 
 class _Timer implements Timer {
-  const _Timer({required this.id, required this.totalTime, required this.isRunning, this.lastStartOn, this.issueId, this.issueProject, this.issueSubject});
+  const _Timer({required this.id, required this.totalTime, required this.isRunning, this.lastStartOn, this.issueId, this.issueProject, this.issueSubject, this.issueTracker});
   factory _Timer.fromJson(Map<String, dynamic> json) => _$TimerFromJson(json);
 
 @override final  String id;
@@ -225,6 +226,7 @@ class _Timer implements Timer {
 @override final  String? issueId;
 @override final  String? issueProject;
 @override final  String? issueSubject;
+@override final  String? issueTracker;
 
 /// Create a copy of Timer
 /// with the given fields replaced by the non-null parameter values.
@@ -239,16 +241,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Timer&&(identical(other.id, id) || other.id == id)&&(identical(other.totalTime, totalTime) || other.totalTime == totalTime)&&(identical(other.isRunning, isRunning) || other.isRunning == isRunning)&&(identical(other.lastStartOn, lastStartOn) || other.lastStartOn == lastStartOn)&&(identical(other.issueId, issueId) || other.issueId == issueId)&&(identical(other.issueProject, issueProject) || other.issueProject == issueProject)&&(identical(other.issueSubject, issueSubject) || other.issueSubject == issueSubject));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Timer&&(identical(other.id, id) || other.id == id)&&(identical(other.totalTime, totalTime) || other.totalTime == totalTime)&&(identical(other.isRunning, isRunning) || other.isRunning == isRunning)&&(identical(other.lastStartOn, lastStartOn) || other.lastStartOn == lastStartOn)&&(identical(other.issueId, issueId) || other.issueId == issueId)&&(identical(other.issueProject, issueProject) || other.issueProject == issueProject)&&(identical(other.issueSubject, issueSubject) || other.issueSubject == issueSubject)&&(identical(other.issueTracker, issueTracker) || other.issueTracker == issueTracker));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,totalTime,isRunning,lastStartOn,issueId,issueProject,issueSubject);
+int get hashCode => Object.hash(runtimeType,id,totalTime,isRunning,lastStartOn,issueId,issueProject,issueSubject,issueTracker);
 
 @override
 String toString() {
-  return 'Timer(id: $id, totalTime: $totalTime, isRunning: $isRunning, lastStartOn: $lastStartOn, issueId: $issueId, issueProject: $issueProject, issueSubject: $issueSubject)';
+  return 'Timer(id: $id, totalTime: $totalTime, isRunning: $isRunning, lastStartOn: $lastStartOn, issueId: $issueId, issueProject: $issueProject, issueSubject: $issueSubject, issueTracker: $issueTracker)';
 }
 
 
@@ -259,7 +261,7 @@ abstract mixin class _$TimerCopyWith<$Res> implements $TimerCopyWith<$Res> {
   factory _$TimerCopyWith(_Timer value, $Res Function(_Timer) _then) = __$TimerCopyWithImpl;
 @override @useResult
 $Res call({
- String id, Duration totalTime, bool isRunning, DateTime? lastStartOn, String? issueId, String? issueProject, String? issueSubject
+ String id, Duration totalTime, bool isRunning, DateTime? lastStartOn, String? issueId, String? issueProject, String? issueSubject, String? issueTracker
 });
 
 
@@ -276,7 +278,7 @@ class __$TimerCopyWithImpl<$Res>
 
 /// Create a copy of Timer
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? totalTime = null,Object? isRunning = null,Object? lastStartOn = freezed,Object? issueId = freezed,Object? issueProject = freezed,Object? issueSubject = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? totalTime = null,Object? isRunning = null,Object? lastStartOn = freezed,Object? issueId = freezed,Object? issueProject = freezed,Object? issueSubject = freezed,Object? issueTracker = freezed,}) {
   return _then(_Timer(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,totalTime: null == totalTime ? _self.totalTime : totalTime // ignore: cast_nullable_to_non_nullable
@@ -285,6 +287,7 @@ as bool,lastStartOn: freezed == lastStartOn ? _self.lastStartOn : lastStartOn //
 as DateTime?,issueId: freezed == issueId ? _self.issueId : issueId // ignore: cast_nullable_to_non_nullable
 as String?,issueProject: freezed == issueProject ? _self.issueProject : issueProject // ignore: cast_nullable_to_non_nullable
 as String?,issueSubject: freezed == issueSubject ? _self.issueSubject : issueSubject // ignore: cast_nullable_to_non_nullable
+as String?,issueTracker: freezed == issueTracker ? _self.issueTracker : issueTracker // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

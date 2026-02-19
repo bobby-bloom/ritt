@@ -13,6 +13,7 @@ abstract class Timer with _$Timer {
     String? issueId,
     String? issueProject,
     String? issueSubject,
+    String? issueTracker,
   }) = _Timer;
 
   factory Timer.fromJson(Map<String, dynamic> json) => _$TimerFromJson(json);

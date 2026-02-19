@@ -16,6 +16,7 @@ _Timer _$TimerFromJson(Map<String, dynamic> json) => _Timer(
   issueId: json['issueId'] as String?,
   issueProject: json['issueProject'] as String?,
   issueSubject: json['issueSubject'] as String?,
+  issueTracker: json['issueTracker'] as String?,
 );
 
 Map<String, dynamic> _$TimerToJson(_Timer instance) => <String, dynamic>{
@@ -26,4 +27,5 @@ Map<String, dynamic> _$TimerToJson(_Timer instance) => <String, dynamic>{
   'issueId': instance.issueId,
   'issueProject': instance.issueProject,
   'issueSubject': instance.issueSubject,
+  'issueTracker': instance.issueTracker,
 };

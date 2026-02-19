@@ -127,6 +127,24 @@ class TimerWidgetContentTop extends StatelessWidget {
                     ),
                 ),
               ),
+              if (timer.issueTracker != null || issue != null) ...[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    '•',
+                    style: TextStyle(
+                      color: context.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ),
+                Text(
+                  issue?.tracker.name ?? timer.issueTracker!,
+                  style: context.textTheme.bodySmall?.copyWith(
+                    color: context.colorScheme.primary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
             ],
           ],
         ),

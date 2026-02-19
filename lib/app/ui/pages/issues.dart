@@ -166,6 +166,7 @@ class IssuesPage extends HookConsumerWidget {
       issueId: (row.cells['id']!.value as int).toString(),
       issueProject: row.cells['project']!.value,
       issueSubject: row.cells['subject']!.value,
+      issueTracker: row.cells['tracker']!.value,
     );
   }
 

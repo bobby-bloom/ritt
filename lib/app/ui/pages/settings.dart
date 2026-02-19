@@ -63,7 +63,7 @@ class SettingsPage extends HookConsumerWidget {
               key: hostFormKey,
               label: shadcn.Text('Redmine Host'),
               child: shadcn.TextField(
-                placeholder: const shadcn.Text('company.redmine.com'),
+                placeholder: const shadcn.Text('example.com'),
                 initialValue: settings.redmineHost,
               ),
             ),

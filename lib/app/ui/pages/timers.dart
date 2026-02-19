@@ -8,6 +8,7 @@ import 'package:ritt/app/ui/pages/timer_form_dialog.dart';
 import 'package:ritt/app/ui/pages/timer_widget.dart';
 import 'package:ritt/app/providers/timers.dart';
 import 'package:ritt/app/theme/theme_extensions.dart';
+import 'package:ritt/redmine/providers/redmine_issues.dart';
 
 class TimersPage extends HookConsumerWidget {
   const TimersPage({super.key});
@@ -15,11 +16,11 @@ class TimersPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final timers = ref.watch(timersProvider);
+    final issues = ref.watch(issuesProvider);
 
     return Stack(
       children: [
-        Container(
-          padding: context.paddingXL,
+        SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: timers.isEmpty ? NoTimersPlaceholder() : TimersGrid(),
@@ -28,20 +29,35 @@ class TimersPage extends HookConsumerWidget {
         Positioned(
           bottom: context.paddingXXL.left,
           right: context.paddingXXL.left,
-          child: FloatingActionButton(
-            onPressed: () => showDialog(
-              context: context,
-              builder: (context) => TimerFormDialog(
-                onSubmit: (issueId, project, subject) => ref
-                    .read(timersProvider.notifier)
-                    .create(
-                      issueId: issueId,
-                      issueProject: issueId,
-                      issueSubject: subject,
-                    ),
+          child: Row(
+            children: [
+              FloatingActionButton(
+                onPressed: () => ref.read(timersProvider.notifier).removeAll(),
+                child: Icon(Icons.delete_forever),
               ),
-            ),
-            child: Icon(Icons.add),
+              context.gapMD,
+              FloatingActionButton(
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => TimerFormDialog(
+                    onSubmit: (issueId, project, subject, tracker) {
+                      final timersCtl = ref.read(timersProvider.notifier);
+                      final issue = issues.value
+                          ?.where((i) => i.id.toString() == issueId)
+                          .firstOrNull;
+
+                      timersCtl.create(
+                        issueId: issueId,
+                        issueProject: project ?? issue?.project.name,
+                        issueSubject: subject ?? issue?.subject,
+                        issueTracker: tracker ?? issue?.tracker.name,
+                      );
+                    },
+                  ),
+                ),
+                child: Icon(Icons.add),
+              ),
+            ],
           ),
         ),
       ],
@@ -101,13 +117,14 @@ class TimersGrid extends HookConsumerWidget {
         key: ValueKey(timer.id),
         timer: timer,
         onDelete: () => ref.read(timersProvider.notifier).remove(timer.id),
-        onEdit: (issueId, project, subject) => ref
+        onEdit: (issueId, project, subject, tracker) => ref
             .read(timersProvider.notifier)
             .update(
               timer.id,
               issueId: issueId,
               issueProject: project,
               issueSubject: subject,
+              issueTracker: tracker,
             ),
       );
     });
@@ -139,7 +156,9 @@ class TimersGrid extends HookConsumerWidget {
               mainAxisSpacing: 16,
               crossAxisSpacing: 16,
               itemCount: reorderableChildren.length,
-              padding: EdgeInsets.only(bottom: context.paddingXL.bottom * 3),
+              padding: context.paddingXL.copyWith(
+                bottom: context.paddingXL.bottom * 3,
+              ),
               itemBuilder: (context, index) {
                 return reorderableChildren[index];
               },
